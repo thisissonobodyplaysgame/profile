@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yung {404}</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+/* ================= RESET ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+    cursor:none !important;
+}
+
+body{
+    overflow:hidden;
+    color:white;
+    background:black;
+}
+
+/* ================= CUSTOM CURSOR ================= */
+#cursor{
+    position:fixed;
+    width:12px;
+    height:12px;
+    background:white;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:999999;
+    transform:translate(-50%,-50%);
+    box-shadow:0 0 10px rgba(255,255,255,0.8);
+}
+
+/* trail */
+.trail{
+    position:fixed;
+    width:12px;
+    height:12px;
+    background:white;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:999998;
+    transform:translate(-50%,-50%);
+    opacity:0.7;
+    animation:fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut{
+    from{
+        opacity:0.7;
+        transform:translate(-50%,-50%) scale(1);
+    }
+    to{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(0.2);
+    }
+}
+
+/* ================= ENTER SCREEN ================= */
+#enterScreen{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.65);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    z-index:9999;
+    backdrop-filter: blur(3px);
+}
+
+#enterScreen h1{
+    font-size:22px;
+    color:#aaa;
+    letter-spacing:2px;
+}
+
+/* ================= BACKGROUND ================= */
+#bg-video{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+.overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.55);
+    z-index:-1;
+}
+
+/* ================= PARTICLES ================= */
+#particles{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:0;
+    pointer-events:none;
+}
+
+.dot{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    opacity:0.7;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    0%{transform:translateY(-10px);opacity:0;}
+    10%{opacity:0.8;}
+    100%{transform:translateY(110vh);opacity:0;}
+}
+
+/* ================= MAIN CONTENT ================= */
+.main{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    width:600px;
+    max-width:90%;
+    z-index:2;
+}
+
+.name{
+    font-size:70px;
+    font-weight:bold;
+    color:#ddd;
+    animation:flash 3s infinite;
+}
+
+@keyframes flash{
+    0%,100%{color:#f5f5f5;}
+    50%{color:#888;}
+}
+
+.desc{
+    margin-top:25px;
+    font-size:18px;
+    line-height:1.7;
+    color:#ccc;
+}
+
+.socials{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+}
+
+.socials a{
+    color:white;
+    font-size:35px;
+    text-decoration:none;
+}
+
+/* ================= PLAYER ================= */
+.player{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,.85);
+    padding:15px;
+    z-index:3;
+}
+
+.controls{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+}
+
+.controls button{
+    background:none;
+    border:none;
+    color:white;
+    font-size:25px;
+}
+
+input[type=range]{
+    width:350px;
+}
+
+.time{
+    text-align:center;
+    margin-top:8px;
+    color:#aaa;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+
+<!-- PARTICLES -->
+<div id="particles"></div>
+
+<!-- ENTER SCREEN -->
+<div id="enterScreen" onclick="enterSite()">
+    <h1>CLICK TO ENTER</h1>
+</div>
+
+<!-- BACKGROUND -->
+<video autoplay muted loop id="bg-video">
+    <source src="https://raw.githubusercontent.com/thisissonobodyplaysgame/music/main/gr.mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <div class="name">Yung {404}</div>
+
+    <div class="desc">
+        just someone who codes random stuff, messes around with game mods, and plays video games a lot.
+    </div>
+
+    <div class="socials">
+        <a href="https://www.youtube.com/@Reimagine-UBG"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://discord.com/users/1329277856567525451"><i class="fa-brands fa-discord"></i></a>
+        <a href="https://github.com/thisissonobodyplaysgame"><i class="fa-brands fa-github"></i></a>
+    </div>
+
+</div>
+
+<!-- AUDIO -->
+<audio id="audio">
+    <source src="https://raw.githubusercontent.com/thisissonobodyplaysgame/music/main/Drakeo%20the%20Ruler%20-%20IngleWEIRD.m4a">
+</audio>
+
+<!-- PLAYER -->
+<div class="player">
+
+    <div class="controls">
+
+        <button onclick="back10()"><i class="fa-solid fa-backward"></i></button>
+
+        <button onclick="togglePlay()" id="playBtn">
+            <i class="fa-solid fa-play"></i>
+        </button>
+
+        <button onclick="forward10()"><i class="fa-solid fa-forward"></i></button>
+
+        <input type="range" min="0" max="100" value="0" id="progress">
+
+    </div>
+
+    <div class="time">
+        <span id="current">0:00</span> /
+        <span id="duration">0:00</span>
+    </div>
+
+</div>
+
+<script>
+
+const cursor = document.getElementById("cursor");
+const audio = document.getElementById("audio");
+const enterScreen = document.getElementById("enterScreen");
+const playBtn = document.getElementById("playBtn");
+const progress = document.getElementById("progress");
+const current = document.getElementById("current");
+const duration = document.getElementById("duration");
+
+/* ENTER */
+function enterSite(){
+    enterScreen.style.display = "none";
+    audio.play().catch(()=>{});
+}
+
+/* CURSOR + TRAIL */
+document.addEventListener("mousemove", (e) => {
+
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+
+    const trail = document.createElement("div");
+    trail.className = "trail";
+    trail.style.left = e.clientX + "px";
+    trail.style.top = e.clientY + "px";
+
+    document.body.appendChild(trail);
+
+    setTimeout(() => trail.remove(), 500);
+});
+
+/* PLAY / PAUSE */
+function togglePlay(){
+    if(audio.paused){
+        audio.play();
+        playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    } else {
+        audio.pause();
+        playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    }
+}
+
+function forward10(){ audio.currentTime += 10; }
+function back10(){ audio.currentTime -= 10; }
+
+/* PROGRESS */
+audio.addEventListener("timeupdate", () => {
+    if(!isNaN(audio.duration)){
+        progress.value = (audio.currentTime / audio.duration) * 100;
+    }
+
+    let m = Math.floor(audio.currentTime / 60);
+    let s = Math.floor(audio.currentTime % 60);
+    if(s < 10) s = "0" + s;
+
+    current.textContent = `${m}:${s}`;
+});
+
+/* DURATION */
+audio.addEventListener("loadedmetadata", () => {
+    let m = Math.floor(audio.duration / 60);
+    let s = Math.floor(audio.duration % 60);
+    if(s < 10) s = "0" + s;
+
+    duration.textContent = `${m}:${s}`;
+});
+
+/* SEEK */
+progress.addEventListener("input", () => {
+    audio.currentTime = (progress.value / 100) * audio.duration;
+});
+
+</script>
+
+</body>
+</html>
